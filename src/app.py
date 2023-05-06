@@ -17,7 +17,7 @@ data = result.fetchall()
 def index():
     if 'userid' not in session:
         return redirect('/login')
-    return "successfully connected"
+    return render_template("sidebar.html")
 
 
 @app.route('/signup',methods=['GET','POST'])
@@ -70,6 +70,13 @@ def login():
         else:
             return render_template("login.html",error=True)
     return render_template("login.html")
+
+@app.route("/get_all")
+def get_bills():
+    return "nothing"
+
+
+
 
 
 @app.route('/logout')
