@@ -1,0 +1,111 @@
+.people-involved {
+    font-size: 2.5rem;
+}
+
+.transactions-details-wrapper {
+    display: flex;
+    gap: 1%;
+}
+
+.transaction-details {
+    border-radius: 1rem;
+    width: 28%;
+    height: 7rem;
+}
+
+.transaction-details-borrow {
+    background-color: rgb(224, 245, 192);
+}
+
+.transaction-details-lend {
+    background-color: rgb(250, 184, 160);
+}
+
+.transactions-wrapper {
+    margin-top: 2.5%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.transaction {
+    margin: 1%;
+    border-radius: 15px;
+    font-size: 2rem;
+    padding: 3%;
+    width: 70%;
+    background-color: aliceblue;
+}
+
+.transaction-amount {
+    color: rgb(43, 114, 114);
+}
+
+.transaction-name {
+    color: orangered;
+}
+
+.transaction-details {
+    font-size: 2rem;
+}
+
+.specific-transaction-details {
+    background-color: aliceblue;
+    border-radius: 30px;
+}
+
+.specific-transaction-content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin: 1%;
+    margin-top: 0%;
+    padding: 3%;
+    font-size: 2rem;
+}
+
+.member-name-paid {
+    grid-column: 1;
+    margin-top: 1%;
+    background-color: rgb(224, 245, 192);
+    border-radius: 10px;
+    padding: 2%;
+    width: max-content;
+}
+
+.member-name-due {
+    grid-column: 1;
+    margin-top: 1%;
+    background-color: rgb(250, 184, 160);
+    border-radius: 10px;
+    padding: 2%;
+    width: max-content;
+}
+
+.total-due-wrapper {
+    width: 100%;
+    height: 100%;
+    grid-column: 2;
+    grid-row: 1 / 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.total-due {
+    display: grid;
+    grid-template-rows: 3fr 1fr;
+    width: 70%;
+    height: 70%;
+    padding: 5%;
+    background-color: rgba(43, 114, 114, 0.5);
+    border-radius: 20px;
+}
+
+.amount-in-rupees {
+    color: aliceblue;
+    grid-row: 1 / 4;
+    font-size: 4.5rem;
+}
+
+.is-due-text {
+    text-align: center;
+}
