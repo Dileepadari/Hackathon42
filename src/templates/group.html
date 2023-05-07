@@ -4,7 +4,7 @@
 
 <head>
     <title>
-        Group Name
+        {{ data[0][1] }}
     </title>
     <link rel="stylesheet" href="../static/css/sidebar.css">
     <link rel="stylesheet" href="../static/css/group.css">
@@ -18,9 +18,9 @@
 <body>
 
     <div class="content">
-        <div class="heading">Rent</div>
+        <div class="heading"> {{ data[0][1] }}</div>
         <div class="people-involved">
-            People involved: <span style="color: #74AA99;">12</span>
+            People involved: <span style="color: #74AA99;">{{ length }}</span>
         </div>
         <div class="transactions-details-wrapper">
             <div class="group transaction-details transaction-details-borrow">
@@ -28,87 +28,83 @@
                     X
                 </div>
                 <div class="group-name">You are owed</div>
-                <div class="">₹400</div>
+                <div class="">₹{{ bybalance }}</div>
             </div>
             <div class="group transaction-details transaction-details-lend">
                 <div class="icon">
                     X
                 </div>
                 <div class="group-name">You owe</div>
-                <div class="amount">₹400</div>
+                <div class="amount">₹{{balance}}</div>
             </div>
-            <div class="add-button">
+            <a class="add-button" href="/add_transaction/{{ data[0][0] }}">
                 <button class="button">
                     <div class="plus-symbol">+</div>
                     <div>Add transaction</div>
                 </button>
-            </div>
+            </a>
         </div>
         <div class="transactions-wrapper">
             <!-- <div>Hello</div> -->
             <div class="transactions">
-                <div class="transaction" style="background-color: #D28D0F95;">
+                {% for transaction in transactions%}
+                <a class="transaction" style="background-color: #D28D0F95;" href="/get_transaction/{{ data[0][0] }}/{{ transaction[0] }}">
                     <div class="transaction-name">
-                        Pizza
+                        {{transaction[8]}}
                     </div>
                     <div class="transaction-amount">
-                        ₹40
+                        ₹{{ transaction[5]}}
                     </div>
-                </div>
-                <div class="transaction">
-                    <div class="transaction-name">
-                        Pizza
-                    </div>
-                    <div class="transaction-amount">
-                        ₹40
-                    </div>
-                </div>
-                <div class="transaction">
-                    <div class="transaction-name">
-                        Pizza
-                    </div>
-                    <div class="transaction-amount">
-                        ₹40
-                    </div>
-                </div>
+                </a>
+                {% endfor %}
             </div>
             <div class="specific-transaction-details">
+                {% if part_transaction %}
                 <div style="background-color: #FFFFFF00; font-size: 3rem;">
                     <span class="transaction-name">
-                        Pizza
+                        {{ part_transaction[0][8] }}
                     </span>
                     |
                     <span class="transaction-payee">
-                        Aditya
+                    {% for main_user in users %}
+                        {% if (main_user[0]|string == part_transaction[0][2]) %}
+                            {{ main_user[1] }}
+                        {% endif %}
+
+                    {% endfor %}
                     </span>
                 </div>
                 <div>
-                    DATE AND TIME
+                    {{ part_transaction[0][7] }} ,&nbsp; {{ part_transaction[0][6] }}
                 </div>
                 <div class="specific-transaction-content">
-                    <div class="member-name-paid">
-                        Raghav
-                    </div>
-                    <div class="member-name-due">
-                        Anushka
-                    </div>
-                    <div class="member-name-due">
-                        Abhinav
-                    </div>
-                    <div class="member-name-paid">
-                        Sakshi
-                    </div>
-                    <div class="total-due-wrapper">
+                    {% for main_user in users %}
+                        {% if part_transaction[0][3] and (main_user[0]|string in part_transaction[0][3].split(',')) %}
+                            <div class="member-name-paid">
+                                {{ main_user[1] }}
+                            </div>
+                        {% endif %}
+                        {% if part_transaction[0][4] and (main_user[0]|string in part_transaction[0][4].split(',')) %}
+                            <div class="member-name-due">
+                                {{ main_user[1] }}
+                            </div>
+                        {% endif %}
+
+                    {% endfor %}
+                        <div class="total-due-wrapper">
                         <div class="total-due">
                             <div class="amount-in-rupees">
-                                ₹500
+                                ₹{{ part_transaction[0][9] }}
                             </div>
+                            for each
                             <div class="is-due-text">
                                 is due
                             </div>
                         </div>
                     </div>
                 </div>
+
+                {% endif %}
             </div>
             <div class="members-wrapper">
                 <div class="members-heading">
@@ -116,7 +112,7 @@
                         Members in Group
                     </div>
                     <div class="members-plus">
-                        <a class="button" href="/add_group">
+                        <a class="button" href="/add_member/{{ data[0][0] }}">
                             +
                         </a>
                     </div>

@@ -13,18 +13,34 @@ query = "SELECT * FROM Groups;"
 result = curser.execute(query)
 data = result.fetchall()
 
-
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if 'userid' not in session:
         return redirect('/login')
+    return redirect('/dashboard')
+    
+@app.route('/dashboard', methods=['GET', 'POST'])
+def get_dashboard():
     connection = sqlite3.connect("MyDatabase.db")
     curser = connection.cursor()
     query = "SELECT * FROM Groups;" 
     result = curser.execute(query)
     data = result.fetchall()
-    return render_template("index.html", groups=data, data=data, file="dashboard.html")
-
+    query = "SELECT * FROM Users where user_id = {0};".format(session['userid']) 
+    result = curser.execute(query)
+    user_details = result.fetchall()
+    query = "SELECT * FROM Transactions;"
+    result = curser.execute(query)
+    transactions = result.fetchall()
+    balance = 0
+    bybalance = 0
+    for transaction in transactions:
+        if(str(session['userid']) in transaction[4].split(",")):
+            balance = balance + transaction[9]
+    for transaction in transactions:
+        if (int(transaction[2]) == session['userid']):
+            bybalance = bybalance + (len(transaction[4].split(","))*transaction[9])
+    return render_template("index.html", groups=data,session_id=session['userid'],user_data=user_details,balance=balance, bybalance=bybalance, file="dashboard.html")
 
 
 @app.route("/add_group", methods=['POST','GET'])
@@ -93,8 +109,9 @@ def add_transaction(groupid):
         payee = request.form['payee']
         name = request.form['name']
         price = request.form['price']
-        
         present = request.form.getlist('present')
+        if payee in present:
+            present.remove(payee)
         presentcount = len(present)
         foreach = int(price)/presentcount
         presentcal = ""
@@ -131,7 +148,11 @@ def add_transaction(groupid):
     query = "SELECT * FROM Groups WHERE group_id ='{0}';".format(groupid)
     result = curser.execute(query)
     data = result.fetchone()
-    return render_template("add_transaction.html", data=users,group_data=data, groupid=groupid )
+    query = "SELECT * FROM Transactions WHERE group_id ={0};".format(groupid)
+    print(query)
+    result = curser.execute(query)
+    transactions = result.fetchall()
+    return render_template("add_transaction.html", data=users,group_data=data, groupid=groupid, transactions=transactions )
 
 
 @app.route('/get_group/<id>', methods=['GET','POST'])
@@ -144,6 +165,7 @@ def get_group(id):
     query = "SELECT * FROM Groups where group_id = "+id+";" 
     result = curser.execute(query)
     data = result.fetchall()
+    no_of_users = len(data[0][2].split(","))
     query = "SELECT * FROM Users;" 
     result = curser.execute(query)
     users = result.fetchall()
@@ -151,14 +173,25 @@ def get_group(id):
     result = curser.execute(query)
     transactions = result.fetchall()
     balance = 0
+    bybalance = 0
     for transaction in transactions:
-        if(str(session['userid']) in transaction[4]):
-            print(transaction[8])
+        if(str(session['userid']) in transaction[4].split(",")):
             balance = balance + transaction[9]
-    return render_template("index.html", file="group.html", data=data, groups=groups, users=users, transactions=transactions, balance=balance)    
+    for transaction in transactions:
+        if (int(transaction[2]) == session['userid']):
+            bybalance = bybalance + (len(transaction[4].split(","))*transaction[9])
+    if 'transaction' not in session:
+        session['transaction'] = ""
+    query = "SELECT * FROM Transactions WHERE transaction_id = '{0}';".format(session['transaction'])
+    result = curser.execute(query)
+    part_trans = result.fetchall()
+    return render_template("index.html", file="group.html",part_transaction=part_trans, data=data,length=no_of_users, groups=groups, users=users, transactions=transactions, balance=balance, bybalance=bybalance)    
 
 
-
+@app.route('/get_transaction/<id>/<tran_id>')
+def get_transaction(id,tran_id):
+    session['transaction'] = tran_id
+    return redirect('/get_group/'+id)
 
 @app.route('/signup',methods=['GET','POST'])
 def signup():

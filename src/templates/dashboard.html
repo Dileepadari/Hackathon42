@@ -4,7 +4,7 @@
 
 <head>
     <title>
-        Group Name
+        {{user_data[0][1] }}
     </title>
     <link rel="stylesheet" href="../static/css/sidebar.css">
     <link rel="stylesheet" href="../static/css/dashboard.css">
@@ -17,11 +17,12 @@
 
 <body>
     <div class="content">
-        <div class="heading">Hey, <span>Ravi</span>.</div>
+        {{transactions}}
+        <div class="heading">Hey, {{ user_data[0][3] }} {{ user_data[0][4] }}<span></span>.</div>
         <div class="money-summary-wrapper">
             <div class="money-description">
-                <div class="owe">You owe <span>₹100</span></div> 
-                <div class="owed">You are owed <span>₹70</span></div> 
+                <div class="owe">You owe <span>₹{{ balance }}</span></div> 
+                <div class="owed">You are owed <span>₹ {{ bybalance }}</span></div> 
             </div>
             <div class="monthly-expenditure">
                 <div class="monthly-expenditure-title">

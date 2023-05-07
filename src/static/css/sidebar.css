@@ -153,6 +153,7 @@ body {
 }
 
 .content {
+    margin-top: 3vh;
     margin-left: 27rem;
     padding: 1.2rem;
     padding-left: 2.5rem;
@@ -166,6 +167,8 @@ body {
 }
 
 .topnav {
+    position: fixed;
+    width: 100vw;
     z-index: 300;
     overflow: hidden;
     background-color: #7C8E15;

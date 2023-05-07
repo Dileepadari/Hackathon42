@@ -7,19 +7,18 @@
     </div>
 </div>
 <div class="sidenav">
-    <div>logo</div>
+    <div><a href="/add_group">+</a></div>
     <a class="navbar-button" href="/">Dashboard</a>
     <hr style="margin-bottom: 5%;margin-top: 5%">
     {% for group in groups %}
     <a class="navbar-button group" href="/get_group/{{ group[0] }}">
-        <div class="icon"></div>
+        <div class="icon">x</div>
         <div class="group-name">{{ group[1]}}</div>
         <div class="debt-credit">
             <span class="debt">₹500</span><span class="credit">₹1000</span>
         </div>
     </a>
     {% endfor %}
-    <div><a href="">+</a></div>
     </div>
     {{ file }}
 {% include file %}
