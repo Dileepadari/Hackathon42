@@ -20,8 +20,8 @@
         <div class="heading">Hey, {{ user_data[0][3] }} {{ user_data[0][4] }}<span></span>.</div>
         <div class="money-summary-wrapper">
             <div class="money-description">
-                <div class="owe">You owe <span>₹{{ balance }}</span></div> 
-                <div class="owed">You are owed <span>₹ {{ bybalance }}</span></div> 
+                <div class="owe">You owe <span>₹{{ balance }}</span></div>
+                <div class="owed">You are owed <span>₹ {{ bybalance }}</span></div>
             </div>
             <div class="monthly-expenditure">
                 <div class="monthly-expenditure-title">
@@ -32,74 +32,76 @@
                 </div>
             </div>
         </div>
-        <div class="heading2">
-            Due transactions
-        </div>
-        <div class="transactions-details"> 
+        <div class="transactions-details">
+            <div class="transactions-details-flexbox">
+                <div class="heading2">
+                    Due transactions
+                </div>
 
-            {% for transaction in transactions %}
-            {% if  transaction[2] == session_id %}
-            {% for user in users%}
-            {% if user[0]|string in transaction[4].split(",") %}
-            <div class="transaction good">
-                <div class="name-in-transaction">
-                    {{ user[1] }}
+                {% for transaction in transactions %}
+                {% if transaction[2] == session_id %}
+                {% for user in users%}
+                {% if user[0]|string in transaction[4].split(",") %}
+                <div class="transaction good">
+                    <div class="name-in-transaction">
+                        {{ user[1] }}
+                    </div>
+                    <div class="owes-or-you-owe">
+                        owes you
+                    </div>
+                    <div class="owes-you-amounts">
+                        ₹{{ transaction[5]}}
+                    </div>
                 </div>
-                <div class="owes-or-you-owe">
-                    owes you
-                </div>
-                <div class="owes-you-amounts">
-                    ₹{{ transaction[5]}}
-                </div>
-            </div>
-            {% endif %}
-            {% endfor %}
-            {% endif %}
-            {% endfor %}
-
-        {% for transaction in transactions %}
-        {% if session_id in transaction[4].split(",") %}
-        <div class="transaction bad">
-            <div class="name-in-transaction">
-            {% for user in users%}
-                {% if transaction[2]|string == user[0]|string %}
-                {{ user[3] }}
                 {% endif %}
-            {% endfor %}
-            </div>
-            <div class="owes-or-you-owe">
-                you owe
-            </div>
-            <div class="owes-you-amounts">
-                ₹{{ transaction[5]}}
-            </div>
-        </div>
-        {% endif %}
-        {% endfor %}
-        </div>
-        <div class="heading2">
-            Transaction history
-        </div>
-        {%for transaction in transactions %}
-        {% if transaction[3] and session_id in transaction[3].split(",") %}
-        <div class="transactions-details"> 
-            <div class="transaction paid">
-                <div class="name-in-transaction">
-                    {% for user in users%}
-                    {% if transaction[2]|string == user[0]|string %}
-                    {{ user[3] }}
-                    {% endif %}
                 {% endfor %}
+                {% endif %}
+                {% endfor %}
+
+                {% for transaction in transactions %}
+                {% if session_id in transaction[4].split(",") %}
+                <div class="transaction bad">
+                    <div class="name-in-transaction">
+                        {% for user in users%}
+                        {% if transaction[2]|string == user[0]|string %}
+                        {{ user[3] }}
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="owes-or-you-owe">
+                        you owe
+                    </div>
+                    <div class="owes-you-amounts">
+                        ₹{{ transaction[5]}}
+                    </div>
                 </div>
-                <div class="owes-or-you-owe">
-                    you owe
-                </div>
-                <div class="owes-you-amounts">
-                    ₹{{transaction[5]}}
-                </div>
+                {% endif %}
+                {% endfor %}
             </div>
-        {% endif %}
-            {% endfor %}
+            <div class="transactions-details-flexbox">
+                <div class="heading2">
+                    Transaction history
+                </div>
+                {%for transaction in transactions %}
+                {% if transaction[3] and session_id in transaction[3].split(",") %}
+                <div class="transaction paid">
+                    <div class="name-in-transaction">
+                        {% for user in users%}
+                        {% if transaction[2]|string == user[0]|string %}
+                        {{ user[3] }}
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="owes-or-you-owe">
+                        you owe
+                    </div>
+                    <div class="owes-you-amounts">
+                        ₹{{transaction[5]}}
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
         </div>
     </div>
 </body>
