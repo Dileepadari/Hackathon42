@@ -177,6 +177,21 @@
     background-color: #9D9D6C50;
 }
 
-.names-of-members-wrapper {
-    
+.member-details {
+    margin-top: 2%;
+    display: grid;
+    grid-template-columns: 1fr 7fr;
+    background-color: #CECEB6;
+    border-radius: 10px;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    width: 95%;
+}
+
+.member-photo {
+    margin-left: 10%;
+}
+
+.member-name {
+    font-size: 2rem;
 }
