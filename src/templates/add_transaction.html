@@ -1,0 +1,79 @@
+<head>
+    <style>
+        form {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f5f5f5;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input[type="text"], select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+input[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+input[type="submit"]:hover {
+  background-color: #3e8e41;
+}
+
+    </style>
+</head>
+
+<form action="/add_transaction/{{ groupid }}" method="POST">
+    
+  
+    <label for="city">Who is paying:</label>
+    <select id="city" name="payee">
+        {% for user in data %}
+      
+        <option value="{{ user[0] }}">{{ user[1] }}</option>
+        {% endfor %}
+    </select><br><br>
+    <label for="name">Item Name:</label>
+    <input type="text" id="name" name="name"><br><br>
+    <label for="price">Price:</label>
+    <input type="text" id="price" name="price"><br><br>
+    
+    <label for="interests">Who is here:</label><br>
+        {% for user in data %}
+      <input type="checkbox" id="{{user[0]}}" name="present" value="{{ user[0] }}" checked>
+        <label for="{{user[0]}}"> {{user [1] }}</label><br>
+        {% endfor %}
+  
+    <input type="submit" value="Submit">
+  </form>
+  {% for user in group_data[2].split(",") %}
+        {% for main_user in data %}
+            {% if main_user[0]|string ==  user %}
+            <img src="../static{{main_user[5]}} " alt="image" width="70px" height="70px"><div class="name">{{ main_user[3] }}&nbsp;&nbsp;{{ main_user[4] }}</div>
+        {% endif %}
+        {% endfor %}
+{% endfor %}
+  

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Form</title>
+  <style>
+    form {
+      width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f2f2f2;
+      border-radius: 10px;
+    }
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+    }
+    input[type="text"] {
+      width: 95%;
+      padding: 10px;
+      margin-bottom: 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    }
+    button[type="submit"] {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background-color: #003366;
+      color: #fff;
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button[type="submit"]:hover {
+      background-color: #002244;
+    }
+  </style>
+</head>
+<body>
+  <form action="/add_group" method="POST">
+    <label for="groupname">Group Name:</label>
+    <input type="text" id="groupname" name="groupname">
+    <button type="submit">Submit</button>
+  </form>
+  <br><br>
+  <div style="text-align: center;">
+  existing-groups:<br>
+  {% for group in data %}
+        <h2>{{group[1]}}</h2><br>
+  {% endfor %}
+</div>
+</body>
+</html>
