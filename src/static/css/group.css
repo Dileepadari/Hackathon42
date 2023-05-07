@@ -188,10 +188,13 @@
     width: 95%;
 }
 
-.member-photo {
-    margin-left: 10%;
+.member-photo img{
+    border-radius: 5%;
+    margin-left: 30%;
 }
 
 .member-name {
+    margin-left: 20%;
+    margin-top: 20px;
     font-size: 2rem;
 }
