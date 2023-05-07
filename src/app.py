@@ -29,18 +29,22 @@ def get_dashboard():
     query = "SELECT * FROM Users where user_id = {0};".format(session['userid']) 
     result = curser.execute(query)
     user_details = result.fetchall()
+    query = "SELECT * FROM Users" 
+    result = curser.execute(query)
+    users = result.fetchall()
     query = "SELECT * FROM Transactions;"
     result = curser.execute(query)
     transactions = result.fetchall()
     balance = 0
     bybalance = 0
+    
     for transaction in transactions:
         if(str(session['userid']) in transaction[4].split(",")):
             balance = balance + transaction[9]
     for transaction in transactions:
         if (int(transaction[2]) == session['userid']):
             bybalance = bybalance + (len(transaction[4].split(","))*transaction[9])
-    return render_template("index.html", groups=data,session_id=session['userid'],user_data=user_details,balance=balance, bybalance=bybalance, file="dashboard.html")
+    return render_template("index.html", groups=data,session_id=str(session['userid']),users=users,user_data=user_details,balance=balance,transactions=transactions, bybalance=bybalance, file="dashboard.html")
 
 
 @app.route("/add_group", methods=['POST','GET'])
@@ -113,7 +117,9 @@ def add_transaction(groupid):
         if payee in present:
             present.remove(payee)
         presentcount = len(present)
+
         foreach = int(price)/presentcount
+        foreach = round(foreach, 3)
         presentcal = ""
         for i in present:
             presentcal = presentcal+i+","
