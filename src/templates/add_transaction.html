@@ -61,32 +61,37 @@ input[type="submit"]:hover {
     <!-- <a href="#about">About</a> -->
   </div>
 </div>
-<div class="content" style="margin-top: 8vh;">
+<div style="margin-top: 10rem; text-align: center;">
   <a href="/get_group/{{ groupid }}">Back to Group</a>
   <div class="forms form-content">
     <div class="heading title">
       Add Transaction
     </div>
     <form action="/add_transaction/{{ groupid }}" method="POST">
-      <label for="city">Who is paying:</label>
+      <label for="city" style="font-size: 2rem;">Who is paying:</label><br>
       <select id="city" name="payee">
         {% for user in data %}
 
         <option value="{{ user[0] }}">{{ user[1] }}</option>
         {% endfor %}
       </select><br><br>
-      <label for="name">Item Name:</label>
-      <input type="text" id="name" name="name"><br><br>
-      <label for="price">Price:</label>
-      <input type="text" id="price" name="price"><br><br>
+      <label for="name" style="font-size: 2rem;">Item Name:</label><br>
 
-      <label for="interests">Who is here:</label><br>
+      <input type="text" id="name" name="name" style="height: max-content;"><br><br>
+      <label for="price" style="font-size: 2rem;">Price:</label><br>
+      <input type="text" id="price" name="price" style="height: max-content;"><br><br>
+
+      <label for="interests" style="font-size: 2rem;">Who is here:</label><br>
       {% for user in data %}
-      <input type="checkbox" id="{{user[0]}}" name="present" value="{{ user[0] }}" checked>
-      <label for="{{user[0]}}"> {{user [1] }}</label><br>
+      <div style="font-size: 1rem;">
+        <input type="checkbox" id="{{user[0]}}" name="present" value="{{ user[0] }}" checked style="height: auto; padding: 0; margin: 0; width: auto;">
+        <label for="{{user[0]}}"> {{user [1] }}</label><br>
+      </div>
       {% endfor %}
-
-      <input type="submit" value="Submit">
+<br>
+<br>
+<br>
+      <input type="submit" value="Submit" class="button223" style="height: auto;">
     </form>
     {% for transaction in transactions %}
     <span class="transaction-name">
