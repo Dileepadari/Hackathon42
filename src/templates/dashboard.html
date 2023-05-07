@@ -25,11 +25,12 @@
             </div>
             <div class="monthly-expenditure">
                 <div class="monthly-expenditure-title">
-                    Monthly expenditure
+                    Your Difference
                 </div>
                 <div class="monthly-expenditure-amount">
-                    ₹500
+                    {{ bybalance - balance }}
                 </div>
+                {{ total }}
             </div>
         </div>
         <div class="transactions-details">
@@ -41,7 +42,7 @@
                 {% for transaction in transactions %}
                 {% if transaction[2] == session_id %}
                 {% for user in users%}
-                {% if user[0]|string in transaction[4].split(",") %}
+                {% if transaction[4] and user[0]|string in transaction[4].split(",") %}
                 <div class="transaction good">
                     <div class="name-in-transaction">
                         {{ user[1] }}
@@ -52,6 +53,7 @@
                     <div class="owes-you-amounts">
                         ₹{{ transaction[5]}}
                     </div>
+                    <a href="/remove_trans/{{ transaction[0] }}/{{ user[0] }}">remove</a>
                 </div>
                 {% endif %}
                 {% endfor %}
@@ -59,7 +61,7 @@
                 {% endfor %}
 
                 {% for transaction in transactions %}
-                {% if session_id in transaction[4].split(",") %}
+                {% if transaction[4] and session_id in transaction[4].split(",") %}
                 <div class="transaction bad">
                     <div class="name-in-transaction">
                         {% for user in users%}

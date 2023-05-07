@@ -39,10 +39,10 @@ def get_dashboard():
     bybalance = 0
     
     for transaction in transactions:
-        if(str(session['userid']) in transaction[4].split(",")):
+        if(transaction[4] and str(session['userid']) in transaction[4].split(",")):
             balance = balance + transaction[9]
     for transaction in transactions:
-        if (int(transaction[2]) == session['userid']):
+        if (transaction[4] and int(transaction[2]) == session['userid']):
             bybalance = bybalance + (len(transaction[4].split(","))*transaction[9])
     return render_template("index.html", groups=data,session_id=str(session['userid']),users=users,user_data=user_details,balance=balance,transactions=transactions, bybalance=bybalance, file="dashboard.html")
 
@@ -288,6 +288,21 @@ def leave_group(group_id):
         connection.commit()
     return redirect('/settings')
 
+@app.route('/remove_trans/<trans_id>/<user_id>')
+def remove_transaction(trans_id, user_id):
+    connection = sqlite3.connect("MyDatabase.db")
+    curser = connection.cursor()
+    query = "SELECT * FROM Transactions WHERE transaction_id = "+trans_id+";"
+    result = curser.execute(query)
+    transactions = result.fetchall()
+    users_all = transactions[0][4].replace(str(user_id)+",", "")
+    print(users_all)
+    users_add = str(transactions[0][3])+str(user_id)+","
+    print(users_add)
+    update_query = 'UPDATE Transactions SET "pending_payment"="{0}" and "done_payment"="{1}" WHERE "transaction_id"={2}'.format(users_all,users_add,trans_id)
+    result = curser.execute(update_query)
+    connection.commit()
+    return redirect('/')
 
 
 
