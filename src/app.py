@@ -251,6 +251,46 @@ def login():
     return render_template("login.html")
 
 
+@app.route('/settings')
+def settings():
+    connection = sqlite3.connect("MyDatabase.db")
+    curser = connection.cursor()
+    query = "SELECT * FROM Groups;" 
+    result = curser.execute(query)
+    groups = result.fetchall()
+    query = "SELECT * FROM Users where user_id={0};".format(session['userid']) 
+    result = curser.execute(query)
+    users = result.fetchall()
+    return render_template("index.html", file="settings_page.html", groups=groups,users=users, session_id=session['userid'])
+
+
+@app.route('/leave/<group_id>')
+def leave_group(group_id):
+    connection = sqlite3.connect("MyDatabase.db")
+    curser = connection.cursor()
+    query = "SELECT * FROM Groups where group_id = {0};".format(group_id) 
+    result = curser.execute(query)
+    groups = result.fetchall()
+    query = "SELECT * FROM Transactions WHERE group_id = "+group_id+";"
+    result = curser.execute(query)
+    transactions = result.fetchall()
+    
+    booling = True
+    for transaction in transactions :
+        if(str(session['userid']) not in transaction[4].split(",")) and (str(session['userid']) != str(transaction[2])):
+            booling = True
+        else:
+            booling = False
+    if(booling):
+        users_all = groups[0][2].replace(str(session['userid'])+",", "")    
+        update_query = 'UPDATE Groups SET "users"="{0}" WHERE "group_id"={1}'.format(users_all,group_id)
+        result = curser.execute(update_query)
+        connection.commit()
+    return redirect('/settings')
+
+
+
+
 @app.route('/logout')
 def logout():
     session.pop('userid', None)
