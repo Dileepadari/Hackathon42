@@ -76,7 +76,7 @@ body {
     overflow-x: hidden;
     /* Disable horizontal scroll */
     padding: 2%;
-    background-color: #bab9b9d0;
+    background-color: #6B694C;
     padding-left: 1.6%;
     padding-top: 0%;
 }
@@ -94,7 +94,7 @@ body {
 }
 
 .navbar-button:hover {
-    background-color: #a7a7a7;
+    background-color: #5F5D44;
 }
 
 .options {
@@ -142,14 +142,14 @@ body {
     grid-column: 1;
     display: flex;
     align-items: center;
-    color: green;
+    color: #DDEC83;
 }
 
 .credit {
     grid-column: 2;
     display: flex;
     align-items: center;
-    color: orangered;
+    color: #FCD6C5;
 }
 
 .content {
@@ -168,7 +168,8 @@ body {
 .topnav {
     z-index: 300;
     overflow: hidden;
-    background-image: linear-gradient(#bab9b9d0, #a7a7a7e8);
+    background-color: #7C8E15;
+    /* background-image: linear-gradient(#bab9b9d0, #a7a7a7e8); */
     height: 5rem;
 }
 
@@ -187,7 +188,7 @@ body {
 }
 
 .topnav a:hover {
-    background-color: #a7a7a7e8;
+    background-color: #5D6A10;
 }
 
 .topnav-right {

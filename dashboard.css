@@ -1,0 +1,43 @@
+.money-summary-wrapper {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.money-description {
+    font-size: 2rem;
+    line-height: 2.5rem;
+    padding: 1.5%;
+    width: 25%;
+    border-radius: 15px;
+    background-color: #F7D08A46;
+}
+
+.owe {
+    color: #C1420B;
+}
+
+.owed {
+    color: #AAC31D;
+}
+
+.monthly-expenditure {
+    background-color: #87B6A728;
+    border-radius: 15px;
+    padding: 1.5%;
+    width: 20%;
+}
+
+.monthly-expenditure-title {
+    font-size: 1.2rem;
+    color: gray;
+}
+
+.monthly-expenditure-amount {
+    font-size: 2rem;
+}
+
+.heading2 {
+    color: #0C0C08;
+    margin-top: 2%;
+    font-size: 2rem;
+}
