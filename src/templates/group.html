@@ -25,14 +25,14 @@
         <div class="transactions-details-wrapper">
             <div class="group transaction-details transaction-details-borrow">
                 <div class="icon">
-                    X
+                    <i class="fa-solid fa-scale-unbalanced-flip"></i>
                 </div>
                 <div class="group-name">You are owed</div>
                 <div class="">₹{{ bybalance }}</div>
             </div>
             <div class="group transaction-details transaction-details-lend">
                 <div class="icon">
-                    X
+                    <i class="fa-solid fa-scale-unbalanced"></i>
                 </div>
                 <div class="group-name">You owe</div>
                 <div class="amount">₹{{balance}}</div>
@@ -103,7 +103,10 @@
                         </div>
                     </div>
                 </div>
-
+                {% else %}
+                    <div style="font-size: 1.5rem;">
+                        Click on a transaction to obtain more information
+                    </div>
                 {% endif %}
             </div>
             <div class="members-wrapper">
