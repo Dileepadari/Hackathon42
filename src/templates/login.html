@@ -1,53 +1,52 @@
-<html lang="en">
+<!DOCTYPE html>
+<html>
 
 <head>
-  <meta charset="UTF-8">
-  <title> Share_Bro | Login </title>
-  <link rel="stylesheet" href="../static/css/register.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
 </head>
-
-
+<link rel="stylesheet" href="../static/css/sidebar.css">
+<link rel="stylesheet" href="../static/css/signup.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=Rubik+80s+Fade&family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
 
 <body>
-  <div class="big">
-    <div class="container">
-
-      <div class="cover">
-        <div class="front">
-          <img src="../static/images/bg.jpg" alt="">
-          <div class="text">
-            <span class="text-1">Sharing and Caring Is <br> Best You Can Give</span>
-            <span class="text-2">A friend in Need is a friend indeed</span>
-          </div>
-        </div>
-
-      </div>
-      <div class="forms" style="padding: 50px 20px;">
-        <div class="form-content" >
-          <div class="login-form" >
-            <div class="title">Login</div>
-            <form method="POST" action="/login">
-              <div class="input-boxes">
-                <div class="input-box">
-                  <input type="text" name="username" placeholder="Enter Username" required>
-                </div>
-                <div class="input-box">
-                  <input type="password" name="password" placeholder="Enter your Password" required>
-                </div>
-                <div class="button input-box">
-                  <input type="submit" value="Sumbit">
-                </div>
-                {% if error %}
-                <h3 style="color:red;text-align: center;">Enter the Correct Credentials</h3>
-                {% endif %}
-                <br>
-                <div class="text sign-up-text">Don't have an account? <a href="/signup" style="color:red;">Signup now</a></div>
+  <div class="topnav">
+    <a href="#home">logo.</a>
+    <div class="topnav-right">
+      <a href="#logout">register</a>
+      <!-- <a href="#about">About</a> -->
+    </div>
+  </div>
+  <div class="content">
+    <div class="forms">
+      <div class="form-content" >
+        <div class="login-form" >
+          <div class="heading title">Login</div>
+          <form method="POST" action="/login">
+            <div class="input-boxes">
+              <div class="input-box">
+                <input type="text" name="username" placeholder="Enter Username" required>
               </div>
-            </form>
+              <div class="input-box">
+                <input type="password" name="password" placeholder="Enter your Password" required>
+              </div>
+              <div class="button input-box">
+                <input type="submit" value="Sumbit">
+              </div>
+              {% if error %}
+              <h3 style="color:#D54B0B;text-align: center;">Enter the Correct Credentials</h3>
+              {% endif %}
+              <br>
+              <div class="text sign-up-text">Don't have an account? <a href="/signup" style="color:#87B6A7;">Signup now</a></div>
+            </div>
+          </form>
 
-          </div>
         </div>
       </div>
     </div>
+  </div>
 </body>
+
+</html>

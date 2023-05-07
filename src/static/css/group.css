@@ -14,17 +14,30 @@
 }
 
 .transaction-details-borrow {
-    background-color: rgb(224, 245, 192);
+    background-color: #AAC21E50;
 }
 
 .transaction-details-lend {
-    background-color: rgb(250, 184, 160);
+    background-color: #F46A2A50;
+}
+
+.group-name {
+    display: flex;
+    align-items:last baseline;
+    margin-left: 0;
+}
+
+.amount {
+    display: flex;
+    align-items: first baseline;
 }
 
 .transactions-wrapper {
     margin-top: 2.5%;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1.5fr 2fr;
+    width:auto;
+    gap: 3rem
 }
 
 .transaction {
@@ -32,16 +45,20 @@
     border-radius: 15px;
     font-size: 2rem;
     padding: 3%;
-    width: 70%;
-    background-color: aliceblue;
+    /* width: 70%; */
+    background-color: #D28D0F40;
+}
+
+.transaction:hover {
+    background-color: #D28D0F70;
 }
 
 .transaction-amount {
-    color: rgb(43, 114, 114);
+    color: #36594D;
 }
 
 .transaction-name {
-    color: orangered;
+    color: #3D3D29;
 }
 
 .transaction-details {
@@ -49,8 +66,9 @@
 }
 
 .specific-transaction-details {
-    background-color: aliceblue;
+    background-color: #B3D0C750;
     border-radius: 30px;
+    margin-right: 5rem;
 }
 
 .specific-transaction-content {
@@ -95,9 +113,9 @@
     grid-template-rows: 3fr 1fr;
     width: 70%;
     height: 70%;
-    padding: 5%;
+    padding: 50%;
     background-color: rgba(43, 114, 114, 0.5);
-    border-radius: 20px;
+    border-radius: 50%;
 }
 
 .amount-in-rupees {
