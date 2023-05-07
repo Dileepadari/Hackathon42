@@ -43,7 +43,7 @@
 
 .group-name {
     display: flex;
-    align-items:last baseline;
+    align-items: last baseline;
     margin-left: 0;
 }
 
@@ -56,7 +56,7 @@
     margin-top: 2.5%;
     display: grid;
     grid-template-columns: 1.5fr 2fr;
-    width:auto;
+    width: auto;
     gap: 3rem
 }
 
@@ -155,4 +155,28 @@
 .is-due-text {
     text-align: center;
     /* grid-row: 3; */
+}
+
+.members-heading {
+    font-size: 2.5rem;
+    display: flex;
+}
+
+.members-plus {
+    margin-left: auto;
+    position: relative;
+    color: #36594D;
+    justify-content: flex-end;
+    margin-right: 5%;
+    padding-left: 3%;
+    padding-right: 3%;
+    border-radius: 20px;
+}
+
+.members-plus:hover {
+    background-color: #9D9D6C50;
+}
+
+.names-of-members-wrapper {
+    
 }
