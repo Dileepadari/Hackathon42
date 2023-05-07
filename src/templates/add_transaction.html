@@ -1,5 +1,13 @@
 <head>
-    <style>
+  <title>My Form</title>
+  <link rel="stylesheet" href="../static/css/sidebar.css">
+  <link rel="stylesheet" href="../static/css/signup.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Rubik+80s+Fade&family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+  <!-- <style>
         form {
   max-width: 500px;
   margin: 0 auto;
@@ -43,40 +51,51 @@ input[type="submit"]:hover {
   background-color: #3e8e41;
 }
 
-    </style>
+    </style> -->
 </head>
 
-
-<a href="/get_group/{{ groupid }}">Back to Group</a>
-
-<form action="/add_transaction/{{ groupid }}" method="POST">
-    <label for="city">Who is paying:</label>
-    <select id="city" name="payee">
+<div class="topnav">
+  <a href="#home">logo.</a>
+  <div class="topnav-right">
+    <a href="#logout">register</a>
+    <!-- <a href="#about">About</a> -->
+  </div>
+</div>
+<div class="content" style="margin-top: 8vh;">
+  <a href="/get_group/{{ groupid }}">Back to Group</a>
+  <div class="forms form-content">
+    <div class="heading title">
+      Add Transaction
+    </div>
+    <form action="/add_transaction/{{ groupid }}" method="POST">
+      <label for="city">Who is paying:</label>
+      <select id="city" name="payee">
         {% for user in data %}
-      
+
         <option value="{{ user[0] }}">{{ user[1] }}</option>
         {% endfor %}
-    </select><br><br>
-    <label for="name">Item Name:</label>
-    <input type="text" id="name" name="name"><br><br>
-    <label for="price">Price:</label>
-    <input type="text" id="price" name="price"><br><br>
-    
-    <label for="interests">Who is here:</label><br>
-        {% for user in data %}
-      <input type="checkbox" id="{{user[0]}}" name="present" value="{{ user[0] }}" checked>
-        <label for="{{user[0]}}"> {{user [1] }}</label><br>
-        {% endfor %}
-  
-    <input type="submit" value="Submit">
-  </form>
-        {% for transaction in transactions %}
-        <span class="transaction-name">
-          {{transaction[8]}}
-        </span>
-      <span class="transaction-amount">
-          ₹{{ transaction[5]}}
-      </span><br>
-        {% endfor %}
+      </select><br><br>
+      <label for="name">Item Name:</label>
+      <input type="text" id="name" name="name"><br><br>
+      <label for="price">Price:</label>
+      <input type="text" id="price" name="price"><br><br>
 
-  
+      <label for="interests">Who is here:</label><br>
+      {% for user in data %}
+      <input type="checkbox" id="{{user[0]}}" name="present" value="{{ user[0] }}" checked>
+      <label for="{{user[0]}}"> {{user [1] }}</label><br>
+      {% endfor %}
+
+      <input type="submit" value="Submit">
+    </form>
+    {% for transaction in transactions %}
+    <span class="transaction-name">
+      {{transaction[8]}}
+    </span>
+    <span class="transaction-amount">
+      ₹{{ transaction[5]}}
+    </span><br>
+    {% endfor %}
+  </div>
+
+</div>

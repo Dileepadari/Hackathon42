@@ -64,6 +64,10 @@ body {
     font-weight: 500;
 }
 
+a {
+    text-decoration: none;
+}
+
 .sidenav {
     margin-top: 5rem;
     height: 100%;
@@ -78,8 +82,9 @@ body {
     padding: 2%;
     background-color: #6B694C;
     padding-left: 1.6%;
-    padding-top: 0%;
+    padding-top: 2%;
 }
+
 
 
 .navbar-button {
@@ -112,6 +117,11 @@ body {
 .group {
     display: grid;
     grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: 2.5fr 6fr;
+}
+
+.add-group {
+    display: grid;
     grid-template-columns: 2.5fr 6fr;
 }
 
@@ -167,6 +177,7 @@ body {
 }
 
 .topnav {
+    top: 0;
     position: fixed;
     width: 100vw;
     z-index: 300;
