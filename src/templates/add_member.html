@@ -1,0 +1,79 @@
+
+<head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      padding: 20px;
+    }
+    h1 {
+      color: #003366;
+      font-size: 36px;
+      text-align: center;
+      margin-top: 50px;
+    }
+    form {
+      width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+    }
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+    }
+    select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    }
+    button[type="submit"] {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background-color: #003366;
+      color: #fff;
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button[type="submit"]:hover {
+      background-color: #002244;
+    }
+  </style>
+</head>
+<a href="/">Back to Dashboard</a>
+  <form action="/add_member/{{ groupid }}" method="POST">
+    <label for="selects">Choose an option:</label>
+    <select id="selects" name="option">
+      {% for user in data %}
+      
+      <option value="{{ user[0] }}">{{ user[1] }}</option>
+      {% endfor %}
+    </select>
+    <button type="submit">Submit</button>
+  </form>
+    {% for user in group_data[2].split(",") %}
+            {% for main_user in data %}
+                {% if main_user[0]|string ==  user %}
+                    <img src="../static{{main_user[5]}} " alt="image" width="70px" height="70px"><div class="name">{{ main_user[3] }}&nbsp;&nbsp;{{ main_user[4] }}</div>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+  {% if error %}
+
+  <h2 style="color: red;text-align: center;">The user is already in the group</h2>
+
+  {% endif %}
+
