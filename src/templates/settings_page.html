@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>User Profile</title>
+        <link rel="icon" href="chanukya.jpeg" type="image/x-icon">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Allerta+Stencil">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="src/static/css/sidebar.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="dashboard.css">
+        <link
+        href="https://fonts.googleapis.com/css2?family=Rubik+80s+Fade&family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+        
+        <style>
+            
+            .container6 {
+                height:100%;
+                margin-left:150px;
+                margin-top: 20px;
+                background-color:aquamarine;
+            }
+            .names {
+                margin-left: 300px;
+                display: flex;
+                justify-content:flex-start;
+            }
+            .user {
+                display: flex;
+                flex-direction: column;
+                font-weight: normal;
+            }
+            .user img {
+                float: left;
+                width: 300px;
+                height: 300px;
+                margin-bottom: 20px;
+                margin-right: 10px;
+                border-radius: 80%;
+                margin-right: 100px;
+                object-fit: cover;
+                object-position: center;
+            }
+            .name {
+                margin-top: 100px; 
+                font-family: "Allerta Stencil", Sans-serif;
+                font-weight: bold;
+                font-size: 30px;
+            }
+            .username {
+                font-size: 25px;
+                font-weight: lighter;
+            }
+            #edit_profile {
+                background-color: green;
+                color: white;
+                font-size: 30px;
+            }
+            .button {
+                background-color: green;
+                color: aliceblue;
+                font-size: 25px;
+                margin-left: 60px;
+                width: 200px;
+                cursor: pointer;
+            }
+            .button:hover {
+                background-color: darkgreen;
+                color: aliceblue;
+                font-size: 25px;
+                cursor: pointer;
+            }
+            #groupx {
+                font-size: 30px;
+                padding-top:10px;
+                
+                background-color:bisque
+            }
+            #groupy {
+                padding-top:10px;
+                padding-bottom:10px;
+                padding-left:10px;
+                padding-right:10px;
+                font-size:20px;
+                background-color:coral;
+                
+
+            }
+            .leave {
+                margin-bottom: 10px;
+                display: flex;
+                justify-content: space-between;
+            }
+            .w3-color {
+                background-color: khaki;
+            }
+            .money {
+                background-color: cyan;
+            }
+            .user2 {
+                background-color: bisque;
+                text-decoration: none;
+            }
+            .user3 {
+                text-decoration: none;
+            }
+            .transactions {
+                font-size: 30px;
+                padding-top:10px;
+                background-color: cornsilk;
+            }
+            .tion {
+                font-size:20px;
+                background-color: burlywood;
+                
+                padding-top:10px;
+                padding-bottom:10px;
+                padding-left:10px;
+                padding-right:10px;
+            }
+            #tion1 {
+                margin-bottom:8px;
+            }
+            .user img {
+                border:1px solid black;
+            }
+        </style>
+        
+    </head>
+    <body>
+        <div class="topnav">
+            <a href="#home">logo.</a>
+            <div class="topnav-right">
+                <a href="#logout">logout</a>
+            </div>
+        </div>
+        <div class="sidenav">
+    
+            <div class="navbar-button options" style="background-color: #484633; margin-top: 2rem;">
+                <div class="icon">
+                    X
+                </div>
+                <div>
+                    Dashboard
+                </div>
+            </div>
+            <div class="navbar-button options">
+                <div class="icon">
+                    X
+                </div>
+                <div>
+                    Transaction History
+                </div>
+            </div>
+            <hr style="margin-bottom: 5%; margin-top: 5%;height:2px;border-width:0;color:#484633;background-color:#484633;">
+            <div class="navbar-button group">
+                <div class="icon">X</div>
+                <div class="group-name">Food</div>
+                <div class="debt-credit">
+                    <span class="debt">₹500</span><span class="credit">₹1000</span>
+                </div>
+            </div>
+            <div class="navbar-button group">
+                <div class="icon">X</div>
+                <div class="group-name">Rent</div>
+                <div class="debt-credit">
+                    <span class="debt">₹500</span><span class="credit">₹1000</span>
+                </div>
+            </div>
+            <div class="navbar-button group">
+                <div class="icon">X</div>
+                <div class="group-name">Taxi</div>
+                <div class="debt-credit">
+                    <span class="debt">₹500</span><span class="credit">₹1000</span>
+                </div>
+            </div>
+            <div class="navbar-button group">
+                <div class="icon">X</div>
+                <div class="group-name">Tantra</div>
+                <div class="debt-credit">
+                    <span class="debt">₹500</span><span class="credit">₹1000</span>
+                </div>
+            </div>
+        </div>
+        <!-- start of setting page -->
+        <div class="container6">
+            <div class="names">
+                <div class="user">
+                    <img src="some image" alt="image">
+                    
+                    <button class="button">Edit Profile</button>
+                </div>
+                <div class="user">
+                    <div class="name">LAST_NAME AND FIRST_NAME</div>
+                    <br>
+                    <div class="username">USERNAME</div><br><br>
+                    <div id="groupx">
+                        Groups Involved:
+                        <div id="groupy">
+                            <div class="leave">
+                                <div class="group1">group1</div> 
+                                <div class="button1">
+                                    <button class="w3-button w3-round-xxlarge w3-color">leave</button>
+                                </div>
+                            </div>
+                            <div class="leave">
+                                group2   
+                                <button class="w3-button w3-round-xxlarge w3-color">leave</button>
+                            </div>
+                            <div class="leave">
+                                group3 
+                                <button class="w3-button w3-round-xxlarge w3-color">leave</button>
+                            </div>
+                            
+                        </div>
+                        
+                    </div><br><br><br>
+                    <div class="transactions">
+                        Transactions from last week:
+                        <div class="tion">
+                            <div id="tion1">
+                                <span class="money">money</span>
+                                to 
+                                <a class="user3" href="click to go to user profile"><span class="user2">username of given user</span></a>
+                            </div>
+                            <div id="tion1">
+                                <span class="money">money</span>
+                                to 
+                                <a class="user3" href="click to go to user profile"><span class="user2">username of given user</span></a>
+                            </div>
+                            <div id="tion1">
+                                <span class="money">money</span>
+                                from     
+                                <a class="user3" href="click to go to user profile"><span class="user2">username of given user</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+<!-- transactions in last week -->
