@@ -12,7 +12,9 @@
         <link
         href="https://fonts.googleapis.com/css2?family=Rubik+80s+Fade&family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
-        
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&display=swap" rel="stylesheet">
         <style>
             
             .container6 {
@@ -122,12 +124,27 @@
             #tion1 {
                 margin-bottom:8px;
             }
+            .logo1 {
+                width: 55px;
+                height: 55px;
+                border-radius: 50%;
+                object-fit: cover;
+                object-position: center;
+            }
+            .heading {
+                font-size:50px;
+                color:rgba(211, 6, 6, 0.636);
+                font-family: 'Instrument Serif', serif;
+            }
         </style>
         
     </head>
     <body>
         <div class="topnav">
-            <a href="#home">logo.</a>
+            <a href="#home">
+                <img class="logo1" src="logo1.png">
+            </a>
+            <div class="heading">CoinConnect</div>
             <div class="topnav-right">
                 <a href="#logout">logout</a>
             </div>
@@ -184,7 +201,7 @@
         <div class="container6">
             <div class="names">
                 <div class="user">
-                    <img src="src/static/images/some_image.png" alt="image">
+                    <img src="some_image.png" alt="image">
                     
                     <button class="button">Edit Profile</button>
                 </div>
