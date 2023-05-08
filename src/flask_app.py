@@ -9,6 +9,42 @@ app.secret_key = 'DelhiisDelhi'
 
 connection = sqlite3.connect("MyDatabase.db")
 curser = connection.cursor()
+
+query = """CREATE TABLE IF NOT EXISTS 'Groups' (
+	"group_id"	INTEGER,
+	"name"	TEXT,
+	"users"	TEXT
+);"""
+curser.execute(query)
+connection.commit()
+query = """CREATE TABLE IF NOT EXISTS 'Users' (
+	"user_id"	INTEGER UNIQUE,
+	"username"	TEXT NOT NULL UNIQUE,
+	"password"	TEXT NOT NULL,
+	"first_name"	TEXT,
+	"last_name"	TEXT,
+	"pro_img_url"	TEXT,
+	"monthly_expense"	INTEGER,
+	PRIMARY KEY("user_id")
+);"""
+curser.execute(query)
+connection.commit()  
+
+query = """CREATE TABLE IF NOT EXISTS 'Transactions' (
+	"transaction_id"	INTEGER,
+	"group_id"	INTEGER,
+	"payee"	TEXT,
+	"done_payment"	TEXT,
+	"pending_payment"	TEXT,
+	"price"	INTEGER,
+	"time"	TEXT,
+	"date"	TEXT,
+	"item_name"	TEXT,
+	"foreach"	INTEGER
+);"""
+curser.execute(query)
+connection.commit()  
+
 query = "SELECT * FROM Groups;" 
 result = curser.execute(query)
 data = result.fetchall()
@@ -21,6 +57,8 @@ def index():
     
 @app.route('/dashboard', methods=['GET', 'POST'])
 def get_dashboard():
+    if 'userid' not in session:
+        return redirect('/login')
     connection = sqlite3.connect("MyDatabase.db")
     curser = connection.cursor()
     query = "SELECT * FROM Groups;" 
@@ -43,12 +81,14 @@ def get_dashboard():
             balance = balance + transaction[9]
     for transaction in transactions:
         if (transaction[4] and int(transaction[2]) == session['userid']):
-            bybalance = bybalance + (len(transaction[4].split(","))*transaction[9])
+            bybalance = bybalance + (((len(transaction[4].split(","))-1))*transaction[9])
     return render_template("index.html", groups=data,session_id=str(session['userid']),users=users,user_data=user_details,balance=balance,transactions=transactions, bybalance=bybalance, file="dashboard.html")
 
 
 @app.route("/add_group", methods=['POST','GET'])
 def add_group():
+    if 'userid' not in session:
+        return redirect('/login')
     if request.method == 'POST':
         name = request.form['groupname']
         userid = str(session['userid'])+','
@@ -72,10 +112,15 @@ def add_group():
     query = "SELECT * FROM Groups;" 
     result = curser.execute(query)
     data = result.fetchall()
-    return render_template("add_group.html", data=data)
+    query = "SELECT * FROM Groups;" 
+    result = curser.execute(query)
+    groups = result.fetchall()
+    return render_template("index.html", data=data, file="add_group.html", groups=groups, session_id=session['userid'], balance=0, bybalance=0)
 
 @app.route("/add_member/<groupid>", methods=['POST','GET'])
 def add_member(groupid):
+    if 'userid' not in session:
+        return redirect('/login')
     if request.method == 'POST':
         name = request.form['option']
         connection = sqlite3.connect("MyDatabase.db")
@@ -109,6 +154,8 @@ def add_member(groupid):
 
 @app.route('/add_transaction/<groupid>', methods=['GET', 'POST'])
 def add_transaction(groupid):
+    if 'userid' not in session:
+        return redirect('/login')
     if request.method == 'POST':
         payee = request.form['payee']
         name = request.form['name']
@@ -117,8 +164,9 @@ def add_transaction(groupid):
         if payee in present:
             present.remove(payee)
         presentcount = len(present)
-
-        foreach = int(price)/presentcount
+        foreach = 0
+        if presentcount != 0:
+            foreach = int(price)/presentcount
         foreach = round(foreach, 3)
         presentcal = ""
         for i in present:
@@ -163,6 +211,8 @@ def add_transaction(groupid):
 
 @app.route('/get_group/<id>', methods=['GET','POST'])
 def get_group(id):
+    if 'userid' not in session:
+        return redirect('/login')
     connection = sqlite3.connect("MyDatabase.db")
     curser = connection.cursor()
     query = "SELECT * FROM Groups;" 
@@ -185,17 +235,21 @@ def get_group(id):
             balance = balance + transaction[9]
     for transaction in transactions:
         if (int(transaction[2]) == session['userid']):
-            bybalance = bybalance + (len(transaction[4].split(","))*transaction[9])
+            bybalance = bybalance + ((len(transaction[4].split(","))-1)*transaction[9])
+
+        
     if 'transaction' not in session:
         session['transaction'] = ""
     query = "SELECT * FROM Transactions WHERE transaction_id = '{0}';".format(session['transaction'])
     result = curser.execute(query)
     part_trans = result.fetchall()
-    return render_template("index.html", file="group.html",part_transaction=part_trans, data=data,length=no_of_users, groups=groups, users=users, transactions=transactions, balance=balance, bybalance=bybalance)    
+    return render_template("index.html", file="group.html",part_transaction=part_trans, data=data,length=no_of_users-1, groups=groups, users=users, transactions=transactions, balance=balance, bybalance=bybalance, session_id = session['userid'])    
 
 
 @app.route('/get_transaction/<id>/<tran_id>')
 def get_transaction(id,tran_id):
+    if 'userid' not in session:
+        return redirect('/login')
     session['transaction'] = tran_id
     return redirect('/get_group/'+id)
 
@@ -253,6 +307,8 @@ def login():
 
 @app.route('/settings')
 def settings():
+    if 'userid' not in session:
+        return redirect('/login')
     connection = sqlite3.connect("MyDatabase.db")
     curser = connection.cursor()
     query = "SELECT * FROM Groups;" 
@@ -261,7 +317,22 @@ def settings():
     query = "SELECT * FROM Users where user_id={0};".format(session['userid']) 
     result = curser.execute(query)
     users = result.fetchall()
-    return render_template("index.html", file="settings_page.html", groups=groups,users=users, session_id=session['userid'])
+    return render_template("index.html", file="settings_page.html", groups=groups,users=users, session_id=session['userid'], balance=0, bybalance=0)
+
+
+@app.route('/about')
+def get_about():
+    if 'userid' not in session:
+        return redirect('/login')
+    connection = sqlite3.connect("MyDatabase.db")
+    curser = connection.cursor()
+    query = "SELECT * FROM Groups;" 
+    result = curser.execute(query)
+    groups = result.fetchall()
+    query = "SELECT * FROM Users where user_id={0};".format(session['userid']) 
+    result = curser.execute(query)
+    users = result.fetchall()
+    return render_template("index.html", file="about_page.html", groups=groups,users=users, session_id=session['userid'], balance=0, bybalance=0)
 
 
 @app.route('/leave/<group_id>')
@@ -310,5 +381,7 @@ def remove_transaction(trans_id, user_id):
 def logout():
     session.pop('userid', None)
     return redirect('/login')
+
+
 if __name__ == '__main__':
     app.run(debug=True)

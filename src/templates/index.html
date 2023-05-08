@@ -1,9 +1,10 @@
 <div class="topnav">
-            <!-- <a href="#home">
-                <img class="logo1" src="src/static/images/logo1.png">
-            </a> -->
-            <a class="heading" href="/">CoinConnect</a>
+            <a href="/">
+                <img class="logo1" src="../static/images/logo1.png" width="50px" height="50p">
+            </a>
+            <a class="heading" href="/" style="margin-left: -20px;">CoinConnect</a>
             <div class="topnav-right">
+                <a href="/about">About</a>
                 <a href="/logout">logout</a>
             </div>
 </div>
@@ -40,6 +41,7 @@
         </div>
     </a>
     {% for group in groups %}
+    {% if group[2] and session_id|string in group[2].split(",") %}
     <a class="navbar-button group" href="/get_group/{{ group[0] }}">
         <div class="icon"><i class="fa-solid fa-wallet"></i></div>
         <div class="group-name">{{ group[1]}}</div>
@@ -47,6 +49,7 @@
             <span class="debt">₹{{balance}}</span><span class="credit">₹{{bybalance}}</span>
         </div>
     </a>
+    {% endif %}
     {% endfor %}
 </div>
 {{ file }}
